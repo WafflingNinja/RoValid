@@ -1,9 +1,15 @@
 {
- "updated": "2026-09-13T20:17:29+00:00",
+ "updated": "2026-09-13T20:19:33+00:00",
  "lengths": {
   "3": [],
   "4": [],
   "5": [
+   {
+    "name": "q6s6q",
+    "found": "2026-09-13T20:18:29+00:00",
+    "tier": "solid",
+    "weight": 25
+   },
    {
     "name": "t8p8t",
     "found": "2026-09-13T15:03:18+00:00",
@@ -59,308 +65,302 @@
     "weight": 25
    },
    {
-    "name": "o03b3",
-    "found": "2026-09-13T20:17:05+00:00",
+    "name": "wm8ki",
+    "found": "2026-09-13T20:19:33+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "p63ek",
-    "found": "2026-09-13T20:17:04+00:00",
+    "name": "6omif",
+    "found": "2026-09-13T20:19:09+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "i46zp",
-    "found": "2026-09-13T20:17:04+00:00",
+    "name": "ed6le",
+    "found": "2026-09-13T20:19:08+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "inv4a",
-    "found": "2026-09-13T20:17:04+00:00",
+    "name": "k8omk",
+    "found": "2026-09-13T20:19:08+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "qam0c",
-    "found": "2026-09-13T20:17:04+00:00",
+    "name": "3yuqm",
+    "found": "2026-09-13T20:19:08+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "61ik4",
-    "found": "2026-09-13T20:17:04+00:00",
+    "name": "3xu0k",
+    "found": "2026-09-13T20:19:08+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "x6je2",
-    "found": "2026-09-13T20:17:03+00:00",
+    "name": "nor8v",
+    "found": "2026-09-13T20:19:07+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ocw4w",
-    "found": "2026-09-13T20:17:03+00:00",
+    "name": "k8afm",
+    "found": "2026-09-13T20:19:07+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "j2suf",
-    "found": "2026-09-13T20:17:03+00:00",
+    "name": "uoj3a",
+    "found": "2026-09-13T20:19:07+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "0z8zi",
-    "found": "2026-09-13T20:17:03+00:00",
+    "name": "x7zaw",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "xfi4h",
-    "found": "2026-09-13T20:17:02+00:00",
+    "name": "ku25u",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "xa41r",
-    "found": "2026-09-13T20:17:02+00:00",
+    "name": "t9nli",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "axg5p",
-    "found": "2026-09-13T20:17:02+00:00",
+    "name": "vxu8j",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "i2d6r",
-    "found": "2026-09-13T20:17:02+00:00",
+    "name": "8eotu",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "8aotz",
-    "found": "2026-09-13T20:17:01+00:00",
+    "name": "qqo1u",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "4z0wu",
-    "found": "2026-09-13T20:17:01+00:00",
+    "name": "gq04a",
+    "found": "2026-09-13T20:19:06+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "0r6er",
-    "found": "2026-09-13T20:17:01+00:00",
+    "name": "blo2i",
+    "found": "2026-09-13T20:19:05+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "5qgea",
-    "found": "2026-09-13T20:17:01+00:00",
+    "name": "pul7k",
+    "found": "2026-09-13T20:19:05+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "zj8ye",
-    "found": "2026-09-13T20:17:01+00:00",
+    "name": "iwz8b",
+    "found": "2026-09-13T20:19:05+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "o0jq5",
-    "found": "2026-09-13T20:17:01+00:00",
+    "name": "w6lro",
+    "found": "2026-09-13T20:19:05+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "qe3hw",
-    "found": "2026-09-13T20:17:00+00:00",
+    "name": "91ikf",
+    "found": "2026-09-13T20:19:05+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "t7p4a",
-    "found": "2026-09-13T20:16:59+00:00",
+    "name": "b62we",
+    "found": "2026-09-13T20:19:05+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "tl7ab",
-    "found": "2026-09-13T20:16:59+00:00",
+    "name": "u7x4c",
+    "found": "2026-09-13T20:19:04+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ws6o4",
-    "found": "2026-09-13T20:16:59+00:00",
+    "name": "3l5nu",
+    "found": "2026-09-13T20:19:04+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "cyu8n",
-    "found": "2026-09-13T20:16:59+00:00",
+    "name": "0ew9i",
+    "found": "2026-09-13T20:19:04+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "iv8qo",
-    "found": "2026-09-13T20:16:59+00:00",
+    "name": "h3ajq",
+    "found": "2026-09-13T20:19:03+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "o1tah",
-    "found": "2026-09-13T20:16:59+00:00",
+    "name": "y4x2i",
+    "found": "2026-09-13T20:19:03+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "2q7o7",
-    "found": "2026-09-13T20:16:58+00:00",
+    "name": "56cpa",
+    "found": "2026-09-13T20:19:03+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "o9y1l",
-    "found": "2026-09-13T20:16:34+00:00",
+    "name": "n4ayo",
+    "found": "2026-09-13T20:19:03+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "sm5oo",
-    "found": "2026-09-13T20:16:33+00:00",
+    "name": "u7bem",
+    "found": "2026-09-13T20:18:38+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "mp2oj",
-    "found": "2026-09-13T20:16:33+00:00",
+    "name": "i89rx",
+    "found": "2026-09-13T20:18:38+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "kl7o4",
-    "found": "2026-09-13T20:16:33+00:00",
+    "name": "8el4e",
+    "found": "2026-09-13T20:18:38+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "66m9o",
-    "found": "2026-09-13T20:16:33+00:00",
+    "name": "0wxo8",
+    "found": "2026-09-13T20:18:38+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "0e3pc",
-    "found": "2026-09-13T20:16:32+00:00",
+    "name": "pe7qg",
+    "found": "2026-09-13T20:18:37+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ht1ac",
-    "found": "2026-09-13T20:16:32+00:00",
+    "name": "821ax",
+    "found": "2026-09-13T20:18:37+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "3gx1o",
-    "found": "2026-09-13T20:16:32+00:00",
+    "name": "l79a0",
+    "found": "2026-09-13T20:18:37+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "e5bp2",
-    "found": "2026-09-13T20:16:32+00:00",
+    "name": "g6xej",
+    "found": "2026-09-13T20:18:37+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ej6bf",
-    "found": "2026-09-13T20:16:31+00:00",
+    "name": "0aawm",
+    "found": "2026-09-13T20:18:36+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "vg8os",
-    "found": "2026-09-13T20:16:31+00:00",
+    "name": "05w8o",
+    "found": "2026-09-13T20:18:36+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ypa6e",
-    "found": "2026-09-13T20:16:30+00:00",
+    "name": "t2e9a",
+    "found": "2026-09-13T20:18:36+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "u0uj8",
-    "found": "2026-09-13T20:16:30+00:00",
+    "name": "w0ub5",
+    "found": "2026-09-13T20:18:36+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "6loph",
-    "found": "2026-09-13T20:16:30+00:00",
+    "name": "r8odz",
+    "found": "2026-09-13T20:18:36+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "guq3w",
-    "found": "2026-09-13T20:16:30+00:00",
+    "name": "5ib4b",
+    "found": "2026-09-13T20:18:35+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "qi2mp",
-    "found": "2026-09-13T20:16:29+00:00",
+    "name": "o036t",
+    "found": "2026-09-13T20:18:35+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "qi9ld",
-    "found": "2026-09-13T20:16:29+00:00",
+    "name": "2sepl",
+    "found": "2026-09-13T20:18:35+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "a76yx",
-    "found": "2026-09-13T20:16:28+00:00",
+    "name": "a8w3c",
+    "found": "2026-09-13T20:18:35+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "es5y9",
-    "found": "2026-09-13T20:16:28+00:00",
+    "name": "1zc8a",
+    "found": "2026-09-13T20:18:34+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "1b5ag",
-    "found": "2026-09-13T20:16:27+00:00",
+    "name": "m93um",
+    "found": "2026-09-13T20:18:34+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ug30h",
-    "found": "2026-09-13T20:16:26+00:00",
+    "name": "0zufr",
+    "found": "2026-09-13T20:18:34+00:00",
     "tier": "plain",
     "weight": 10
    },
    {
-    "name": "ow2w4",
-    "found": "2026-09-13T20:16:26+00:00",
-    "tier": "plain",
-    "weight": 10
-   },
-   {
-    "name": "9jyek",
-    "found": "2026-09-13T20:16:26+00:00",
+    "name": "1zt0e",
+    "found": "2026-09-13T20:18:33+00:00",
     "tier": "plain",
     "weight": 10
    }
@@ -377,7 +377,7 @@
   },
   "5": {
    "checked": 377800,
-   "found": 129475
+   "found": 129813
   }
  },
  "released": [],
