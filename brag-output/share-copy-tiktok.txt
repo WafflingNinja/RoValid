@@ -1,6 +1,6 @@
-screened 900,000 roblox usernames. every free one looks like 2b6b2.
+every good roblox username is taken. ace, nova, bolt, jade, echo, onyx - all gone.
 
-free names arent scarce - good ones are. so it just watches 3,600 of them
-and waits for someone to rename. 0 released so far.
+so i built something that watches 3,600 of the good ones and posts the second
+someone renames away from one. free, no login, no account.
 
-#roblox #robloxtok #robloxusername #ogusername #rareusername #4lusername #python #buildinpublic #fyp
+#roblox #robloxtok #robloxusername #ogusername #rareusername #4lusername #usernameideas #robloxfyp #fyp
