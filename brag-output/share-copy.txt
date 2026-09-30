@@ -1,0 +1,7 @@
+Made RoValid. It screens 200 Roblox usernames per request, and after 900,000 of them
+every free name it found looks like 2b6b2.
+
+Free names are not scarce. Good ones are — so it stopped hunting and started watching
+3,600 names for the moment somebody renames away from one. 0 released so far.
+
+rostikcermak-pixel.github.io/RoValid

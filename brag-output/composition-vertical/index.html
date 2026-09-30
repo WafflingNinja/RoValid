@@ -1,0 +1,965 @@
+<!doctype html>
+<html lang="en" data-resolution="portrait">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=1080, height=1920" />
+    <title>RoValid — brag (vertical)</title>
+    <script src="assets/vendor/gsap.min.js"></script>
+    <script src="assets/audio-data.js"></script>
+    <style>
+      @font-face {
+        font-family: "Archivo";
+        font-style: normal;
+        font-weight: 600;
+        src: url("assets/fonts/Archivo-600.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "Archivo";
+        font-style: normal;
+        font-weight: 800;
+        src: url("assets/fonts/Archivo-800.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 400;
+        src: url("assets/fonts/IBMPlexMono-400.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 500;
+        src: url("assets/fonts/IBMPlexMono-500.woff2") format("woff2");
+      }
+      @font-face {
+        font-family: "IBM Plex Mono";
+        font-style: normal;
+        font-weight: 600;
+        src: url("assets/fonts/IBMPlexMono-600.woff2") format("woff2");
+      }
+
+      /* Palette lifted verbatim from docs/index.html :root */
+      :root {
+        --ground: #07090d;
+        --panel: #0e131c;
+        --rail: #0a0f17;
+        --line: #1d2532;
+        --line-soft: #161d29;
+        --ink: #dce3ef;
+        --ink-dim: #8e9ab4;
+        --muted: #67728c;
+        --dead: #3c4557;
+        --accent: #4c9aff;
+        --green: #35d07f;
+        --gold: #f5b72e;
+      }
+
+      * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+      }
+      html,
+      body {
+        width: 1080px;
+        height: 1920px;
+        overflow: hidden;
+        background: var(--ground);
+      }
+      #root {
+        position: relative;
+        width: 100%;
+        height: 100%;
+        overflow: hidden;
+        background: var(--ground);
+        color: var(--ink);
+        font-family: "IBM Plex Mono", monospace;
+      }
+
+      #bg {
+        position: absolute;
+        inset: 0;
+        background: var(--ground);
+      }
+      #bg-glow {
+        position: absolute;
+        inset: 0;
+        background: radial-gradient(
+          70% 42% at 50% 42%,
+          rgba(76, 154, 255, 0.16),
+          rgba(7, 9, 13, 0) 68%
+        );
+        opacity: 0.25;
+      }
+      #bg-grid {
+        position: absolute;
+        inset: 0;
+        background-image: linear-gradient(var(--line-soft) 1px, transparent 1px);
+        background-size: 100% 54px;
+        opacity: 0.28;
+      }
+
+      /* TikTok's caption block and action rail sit over the bottom ~400px and
+         the right edge, so every scene lives inside this band. */
+      .clip {
+        position: absolute;
+        inset: 0;
+        padding: 200px 48px 420px;
+      }
+
+      /* ── scene 1 : the premise ───────────────────────────────── */
+      #s1 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 18px;
+      }
+      .s1-row {
+        display: flex;
+        align-items: baseline;
+        gap: 20px;
+        font-size: 68px;
+        font-weight: 500;
+        letter-spacing: -0.01em;
+      }
+      #s1-prompt {
+        color: var(--green);
+        font-weight: 600;
+      }
+      .type-wrap {
+        display: inline-block;
+        overflow: hidden;
+        white-space: nowrap;
+        width: 0;
+      }
+      .caret {
+        display: inline-block;
+        width: 28px;
+        height: 68px;
+        background: var(--green);
+        transform: translateY(10px);
+      }
+      #caretB {
+        opacity: 0;
+      }
+      .s1-indent {
+        padding-left: 52px;
+      }
+
+      /* ── scene 2 : the two stages ────────────────────────────── */
+      #s2 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+      }
+      #s2-kicker {
+        font-family: Archivo, sans-serif;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+        color: var(--ink-dim);
+        margin-bottom: 8px;
+      }
+      .stage {
+        background: var(--panel);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        padding: 34px 38px;
+      }
+      .stage .idx {
+        display: block;
+        font-family: Archivo, sans-serif;
+        font-size: 27px;
+        font-weight: 600;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--accent);
+      }
+      .stage .val {
+        display: block;
+        font-size: 58px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        margin-top: 14px;
+      }
+      .stage .endp {
+        display: block;
+        font-size: 27px;
+        color: var(--ink-dim);
+        margin-top: 12px;
+      }
+      #stage2 .idx {
+        color: var(--green);
+      }
+      #s2-caveat {
+        font-size: 50px;
+        font-weight: 500;
+        color: var(--ink);
+        margin-top: 10px;
+      }
+      #s2-caveat b {
+        color: var(--gold);
+        font-weight: 600;
+      }
+
+      /* ── scene 3 : the board ─────────────────────────────────── */
+      #s3 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+      }
+      #masthead {
+        display: flex;
+        align-items: baseline;
+        gap: 22px;
+        padding-bottom: 22px;
+        border-bottom: 1px solid var(--line);
+      }
+      #masthead h1 {
+        font-family: Archivo, sans-serif;
+        font-size: 54px;
+        font-weight: 800;
+        letter-spacing: -0.02em;
+        color: var(--ink);
+      }
+      #masthead h1 span {
+        color: var(--accent);
+      }
+      #masthead .live {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 14px;
+        font-size: 26px;
+        color: var(--ink-dim);
+      }
+      #masthead .dot {
+        width: 15px;
+        height: 15px;
+        border-radius: 50%;
+        background: var(--green);
+        box-shadow: 0 0 0 6px rgba(53, 208, 127, 0.15);
+      }
+      #counter-box {
+        position: relative;
+      }
+      #counter {
+        display: flex;
+        gap: 18px;
+      }
+      .glyph {
+        display: flex;
+        flex-direction: column;
+      }
+      .grow {
+        display: flex;
+      }
+      .cell {
+        width: 36px;
+        height: 40px;
+      }
+      .c-full {
+        background: var(--green);
+      }
+      .c-top {
+        background: linear-gradient(to bottom, var(--green) 50%, transparent 50%);
+      }
+      .c-bot {
+        background: linear-gradient(to top, var(--green) 50%, transparent 50%);
+      }
+      .c-quad {
+        background: linear-gradient(to top, var(--green) 45%, transparent 45%);
+      }
+      #counter-bloom {
+        position: absolute;
+        inset: -50px;
+        background: radial-gradient(50% 60% at 36% 42%, rgba(53, 208, 127, 0.32), transparent 70%);
+        opacity: 0;
+        pointer-events: none;
+      }
+      #count-label {
+        font-family: Archivo, sans-serif;
+        font-size: 27px;
+        font-weight: 600;
+        letter-spacing: 0.19em;
+        text-transform: uppercase;
+        color: var(--green);
+        margin-top: 20px;
+      }
+      .facts {
+        display: flex;
+        gap: 2px;
+        background: var(--line-soft);
+        border: 1px solid var(--line-soft);
+        border-radius: 12px;
+        overflow: hidden;
+      }
+      .facts .fact {
+        flex: 1;
+      }
+      .fact {
+        background: var(--panel);
+        padding: 24px 26px;
+      }
+      .fact b {
+        display: block;
+        font-size: 46px;
+        font-weight: 600;
+        letter-spacing: -0.01em;
+        color: var(--ink);
+      }
+      .fact small {
+        display: block;
+        font-family: Archivo, sans-serif;
+        font-size: 20px;
+        font-weight: 600;
+        letter-spacing: 0.11em;
+        text-transform: uppercase;
+        color: var(--ink-dim);
+        margin-top: 10px;
+      }
+      #feedwrap {
+        border: 1px solid var(--line);
+        border-radius: 16px;
+        background: var(--rail);
+        overflow: hidden;
+      }
+      #feedhead {
+        display: flex;
+        align-items: center;
+        gap: 18px;
+        padding: 26px 32px;
+        background: var(--panel);
+        border-bottom: 1px solid var(--line);
+      }
+      #feedhead h2 {
+        font-family: Archivo, sans-serif;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--ink-dim);
+      }
+      #feedhead .note {
+        margin-left: auto;
+        font-size: 26px;
+        color: var(--ink-dim);
+      }
+      #feed {
+        list-style: none;
+        padding: 14px 16px 18px;
+      }
+      .line {
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        padding: 20px 26px;
+        border-radius: 10px;
+      }
+      .line .mark {
+        width: 26px;
+        color: var(--muted);
+        flex: none;
+        font-size: 30px;
+      }
+      .line .nm {
+        font-size: 52px;
+        font-weight: 600;
+        letter-spacing: 0.05em;
+        color: var(--ink-dim);
+      }
+      .line .tag {
+        font-size: 24px;
+        font-weight: 600;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: #717b93;
+        flex: none;
+      }
+      .line .when {
+        margin-left: auto;
+        font-size: 26px;
+        color: #717b93;
+        flex: none;
+      }
+
+      .tline {
+        display: block;
+      }
+
+      /* ── scene 4 : the turn ──────────────────────────────────── */
+      #s4 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 10px;
+      }
+      .turn {
+        font-size: 88px;
+        font-weight: 600;
+        letter-spacing: -0.02em;
+        line-height: 1.16;
+      }
+      #turn2 {
+        color: var(--gold);
+        margin-top: 16px;
+      }
+      #s4-facts {
+        margin-top: 56px;
+      }
+
+      /* ── scene 5 : the wait ──────────────────────────────────── */
+      #s5 {
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        gap: 30px;
+      }
+      #band-label {
+        font-family: Archivo, sans-serif;
+        font-size: 26px;
+        font-weight: 600;
+        letter-spacing: 0.17em;
+        text-transform: uppercase;
+        color: var(--gold);
+      }
+      #band {
+        position: relative;
+        display: flex;
+        align-items: center;
+        gap: 26px;
+        height: 150px;
+        padding: 0 34px;
+        border: 1px dashed rgba(245, 183, 46, 0.42);
+        border-left: 4px solid var(--gold);
+        border-radius: 12px;
+        background: linear-gradient(90deg, rgba(245, 183, 46, 0.1), transparent 62%);
+        overflow: hidden;
+      }
+      #band .mark {
+        font-size: 40px;
+        color: var(--gold);
+      }
+      #band .empty {
+        font-size: 40px;
+        color: var(--ink-dim);
+      }
+      #scan {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 220px;
+        height: 100%;
+        background: linear-gradient(90deg, transparent, rgba(245, 183, 46, 0.34), transparent);
+        opacity: 0;
+      }
+      #s5-note {
+        font-size: 48px;
+        font-weight: 500;
+        line-height: 1.3;
+        color: var(--ink-dim);
+        margin-top: 6px;
+      }
+      #s5-verdict {
+        opacity: 0;
+        margin-top: 6px;
+      }
+      #s5-zero {
+        display: block;
+        font-size: 84px;
+        font-weight: 600;
+        color: var(--muted);
+        letter-spacing: -0.02em;
+      }
+      #s5-still {
+        display: block;
+        font-size: 84px;
+        font-weight: 600;
+        color: var(--gold);
+        letter-spacing: -0.02em;
+        margin-top: 8px;
+      }
+
+      /* ── scene 6 : outro ─────────────────────────────────────── */
+      #s6 {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        gap: 26px;
+      }
+      #wordmark {
+        font-family: Archivo, sans-serif;
+        font-size: 112px;
+        font-weight: 800;
+        letter-spacing: -0.03em;
+        color: var(--ink);
+      }
+      #wordmark span {
+        color: var(--accent);
+      }
+      #url {
+        font-size: 32px;
+        color: var(--ink-dim);
+        letter-spacing: 0.01em;
+      }
+      #kicker {
+        font-size: 46px;
+        font-weight: 500;
+        color: var(--ink-dim);
+        margin-top: 30px;
+      }
+    </style>
+  </head>
+  <body>
+    <div
+      id="root"
+      data-composition-id="vertical"
+      data-start="0"
+      data-duration="24.1"
+      data-width="1080"
+      data-height="1920"
+      data-fps="30"
+    >
+      <div id="bg"></div>
+      <div id="bg-glow"></div>
+      <div id="bg-grid"></div>
+
+      <!-- ── scene 1 ─────────────────────────────────────────── -->
+      <section id="s1" class="clip" data-start="0" data-duration="3.1811" data-track-index="0">
+        <div class="s1-row">
+          <span id="s1-prompt">&rsaquo;</span>
+          <span class="type-wrap" id="type-a" data-layout-allow-overflow="true"
+            ><span id="text-a">every good roblox</span></span
+          >
+          <span class="caret" id="caretA"></span>
+        </div>
+        <div class="s1-row s1-indent">
+          <span class="type-wrap" id="type-b" data-layout-allow-overflow="true"
+            ><span id="text-b">name is taken.</span></span
+          >
+          <span class="caret" id="caretB"></span>
+        </div>
+      </section>
+
+      <!-- ── scene 2 ─────────────────────────────────────────── -->
+      <section id="s2" class="clip" data-start="3.1811" data-duration="4.2145" data-track-index="0">
+        <div id="s2-kicker">200 names, one request</div>
+        <div class="stage" id="stage1">
+          <span class="idx">stage 1 &mdash; screen</span>
+          <span class="val">200 names / request</span>
+          <span class="endp">users.roblox.com</span>
+        </div>
+        <div class="stage" id="stage2">
+          <span class="idx">stage 2 &mdash; confirm</span>
+          <span class="val">1 name / request</span>
+          <span class="endp">auth.roblox.com</span>
+        </div>
+        <div id="s2-caveat">stage 2 is <b>not optional</b>.</div>
+      </section>
+
+      <!-- ── scene 3 ─────────────────────────────────────────── -->
+      <section id="s3" class="clip" data-start="7.3956" data-duration="5.2593" data-track-index="0">
+        <div id="masthead">
+          <h1>RoValid <span>Live</span></h1>
+          <span class="live"><span class="dot"></span>hunting</span>
+        </div>
+        <div id="counter-box">
+          <div id="counter-bloom"></div>
+          <div id="counter"></div>
+          <div id="count-label">found</div>
+        </div>
+        <div class="facts" id="s3-facts">
+          <div class="fact"><b>900,000</b><small>screened</small></div>
+          <div class="fact"><b>3,600</b><small>watchlist</small></div>
+          <div class="fact"><b>0</b><small>released</small></div>
+        </div>
+        <div id="feedwrap">
+          <div id="feedhead">
+            <h2>Feed</h2>
+            <span class="note">60 on the board</span>
+          </div>
+          <ul id="feed">
+            <li class="line" id="row0">
+              <span class="mark">&middot;</span><span class="nm">2b6b2</span
+              ><span class="tag">5-char</span><span class="when">2d</span>
+            </li>
+            <li class="line" id="row1">
+              <span class="mark">&middot;</span><span class="nm">q6s6q</span
+              ><span class="tag">5-char</span><span class="when">4d</span>
+            </li>
+            <li class="line" id="row2">
+              <span class="mark">&middot;</span><span class="nm">t8p8t</span
+              ><span class="tag">5-char</span><span class="when">4d</span>
+            </li>
+            <li class="line" id="row3">
+              <span class="mark">&middot;</span><span class="nm">9fzf9</span
+              ><span class="tag">5-char</span><span class="when">5d</span>
+            </li>
+          </ul>
+        </div>
+      </section>
+
+      <!-- ── scene 4 ─────────────────────────────────────────── -->
+      <section id="s4" class="clip" data-start="12.6549" data-duration="4.2028" data-track-index="0">
+        <div class="turn" id="turn1"><span class="tline">free names</span><span class="tline">are not scarce.</span></div>
+        <div class="turn" id="turn2">good ones are.</div>
+        <div class="facts" id="s4-facts">
+          <div class="fact"><b>183</b><small>free names sampled</small></div>
+          <div class="fact"><b>0</b><small>without digits</small></div>
+        </div>
+      </section>
+
+      <!-- ── scene 5 ─────────────────────────────────────────── -->
+      <section id="s5" class="clip" data-start="16.8577" data-duration="4.7369" data-track-index="0">
+        <div id="band-label">watchlist &mdash; 3,600 names</div>
+        <div id="band">
+          <span class="mark">&#10022;</span>
+          <span class="empty">waiting for a release</span>
+          <div id="scan"></div>
+        </div>
+        <div id="s5-note"><span class="tline">they only come back</span><span class="tline">when somebody renames.</span></div>
+        <div id="s5-verdict">
+          <span id="s5-zero">0 released.</span>
+          <span id="s5-still">still watching.</span>
+        </div>
+      </section>
+
+      <!-- ── scene 6 ─────────────────────────────────────────── -->
+      <section id="s6" class="clip" data-start="21.5946" data-duration="2.5054" data-track-index="0">
+        <div id="wordmark">RoValid <span>Live</span></div>
+        <div id="url">rostikcermak-pixel.github.io/RoValid</div>
+        <div id="kicker">that is the game.</div>
+      </section>
+
+      <!-- ── audio ───────────────────────────────────────────── -->
+      <audio
+        id="v-bgm"
+        src="assets/music/happy-beats-business-moves-vol-9-by-ende-dot-app.mp3"
+        data-start="0"
+        data-duration="24.1"
+        data-media-start="0"
+        data-track-index="8"
+        data-volume="1"
+      ></audio>
+
+      <audio id="vk0" src="assets/sfx/keyboard/keypress-001.wav" data-start="0.24" data-track-index="9" data-volume="0.34"></audio>
+      <audio id="vk1" src="assets/sfx/keyboard/keypress-007.wav" data-start="0.39" data-track-index="10" data-volume="0.3"></audio>
+      <audio id="vk2" src="assets/sfx/keyboard/keypress-012.wav" data-start="0.53" data-track-index="11" data-volume="0.32"></audio>
+      <audio id="vk3" src="assets/sfx/keyboard/keypress-004.wav" data-start="0.68" data-track-index="12" data-volume="0.29"></audio>
+      <audio id="vk4" src="assets/sfx/keyboard/keypress-019.wav" data-start="0.82" data-track-index="13" data-volume="0.33"></audio>
+      <audio id="vk5" src="assets/sfx/keyboard/keypress-001.wav" data-start="1.05" data-track-index="14" data-volume="0.3"></audio>
+      <audio id="vk6" src="assets/sfx/keyboard/keypress-012.wav" data-start="1.19" data-track-index="15" data-volume="0.32"></audio>
+      <audio id="vk7" src="assets/sfx/keyboard/keypress-007.wav" data-start="1.33" data-track-index="16" data-volume="0.29"></audio>
+      <audio id="vk8" src="assets/sfx/keyboard/keypress-004.wav" data-start="1.46" data-track-index="17" data-volume="0.33"></audio>
+      <audio id="vk9" src="assets/sfx/keyboard/keypress-019.wav" data-start="1.58" data-track-index="18" data-volume="0.3"></audio>
+
+      <audio id="v-stage1" src="assets/sfx/interface/drop_001.ogg" data-start="3.7036" data-track-index="19" data-volume="0.55"></audio>
+      <audio id="v-stage2" src="assets/sfx/interface/drop_002.ogg" data-start="4.7485" data-track-index="20" data-volume="0.55"></audio>
+
+      <audio id="v-row0" src="assets/sfx/casino/card-slide-1.ogg" data-start="7.918" data-track-index="21" data-volume="0.45"></audio>
+      <audio id="v-row1" src="assets/sfx/casino/card-slide-3.ogg" data-start="8.9629" data-track-index="22" data-volume="0.45"></audio>
+      <audio id="v-row2" src="assets/sfx/casino/card-slide-5.ogg" data-start="10.0078" data-track-index="23" data-volume="0.45"></audio>
+      <audio id="v-row3" src="assets/sfx/casino/card-slide-7.ogg" data-start="11.0643" data-track-index="24" data-volume="0.45"></audio>
+      <audio id="v-count" src="assets/sfx/casino/chips-stack-2.ogg" data-start="11.5984" data-track-index="25" data-volume="0.5"></audio>
+
+      <audio id="v-turn" src="assets/sfx/impact/impactSoft_medium_000.ogg" data-start="12.6549" data-track-index="26" data-volume="0.6"></audio>
+      <audio id="v-bell" src="assets/sfx/impact/impactBell_heavy_000.ogg" data-start="20.5264" data-track-index="27" data-volume="0.62"></audio>
+    </div>
+
+    <script>
+      // ── the board's own big-number renderer, ported from docs/index.html ──
+      var GLYPH = {
+        "0": ["█▀█", "█ █", "█▄█"],
+        "1": [" ▄█", "  █", "  █"],
+        "2": ["▀▀█", "▄▀▀", "█▄▄"],
+        "3": ["▀▀█", " ▀█", "▀▀█"],
+        "4": ["█ █", "▀▀█", "  █"],
+        "5": ["█▀▀", "▀▀█", "▀▀█"],
+        "6": ["█▀▀", "█▀█", "█▄█"],
+        "7": ["▀▀█", "  █", "  █"],
+        "8": ["█▀█", "█▀█", "█▄█"],
+        "9": ["█▀█", "▀▀█", "▀▀█"],
+        ",": ["   ", "   ", "▗  "],
+        ".": ["   ", "   ", "▄  "],
+        "K": ["█ █", "██ ", "█ █"],
+        "M": ["█▄█", "█ █", "█ █"]
+      };
+      var CELL = { "█": "c-full", "▀": "c-top", "▄": "c-bot", "▗": "c-quad" };
+
+      function abbreviate(n) {
+        if (n < 1000) return String(n);
+        if (n < 999950) return (n / 1000).toFixed(1).replace(/\.0$/, "") + "K";
+        return (n / 1e6).toFixed(1).replace(/\.0$/, "") + "M";
+      }
+
+      function drawCount(host, n) {
+        var text = abbreviate(n);
+        host.textContent = "";
+        for (var i = 0; i < text.length; i++) {
+          var rows = GLYPH[text[i]] || ["   ", "   ", "   "];
+          var cols = text[i] === "." || text[i] === "," ? 1 : 3;
+          var g = document.createElement("div");
+          g.className = "glyph";
+          for (var r = 0; r < 3; r++) {
+            var row = document.createElement("div");
+            row.className = "grow";
+            for (var c = 0; c < cols; c++) {
+              var cell = document.createElement("div");
+              cell.className = "cell " + (CELL[rows[r][c]] || "");
+              row.appendChild(cell);
+            }
+            g.appendChild(row);
+          }
+          host.appendChild(g);
+        }
+      }
+
+      var counterHost = document.getElementById("counter");
+      drawCount(counterHost, 0);
+
+      function measure(wrapId) {
+        var wrap = document.getElementById(wrapId);
+        wrap.style.width = "auto";
+        var w = wrap.getBoundingClientRect().width;
+        wrap.style.width = "0px";
+        return w;
+      }
+
+      function build() {
+        var tl = gsap.timeline({ paused: true });
+
+        // ── scene 1 : the premise, typed over two lines ────────
+        var wA = measure("type-a");
+        var wB = measure("type-b");
+        tl.fromTo("#s1", { opacity: 0 }, { opacity: 1, duration: 0.24, ease: "power1.out" }, 0.04);
+        tl.fromTo("#type-a", { width: 0 }, { width: wA, duration: 0.72, ease: "steps(17)" }, 0.22);
+        tl.fromTo(
+          "#caretA",
+          { opacity: 1 },
+          { opacity: 0.12, duration: 0.19, repeat: 3, yoyo: true, ease: "steps(1)" },
+          0.22
+        );
+        tl.to("#caretA", { opacity: 0, duration: 0.01 }, 0.99);
+        tl.fromTo("#type-b", { width: 0 }, { width: wB, duration: 0.6, ease: "steps(14)" }, 1.02);
+        tl.fromTo(
+          "#caretB",
+          { opacity: 1 },
+          {
+            opacity: 0.12,
+            duration: 0.4,
+            repeat: 4,
+            yoyo: true,
+            ease: "steps(1)",
+            immediateRender: false
+          },
+          1.02
+        );
+        tl.to("#s1", { opacity: 0, duration: 0.2, ease: "power1.in" }, 2.98);
+
+        // ── scene 2 : the two stages ───────────────────────────
+        tl.fromTo(
+          "#s2-kicker",
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" },
+          3.2811
+        );
+        // beat-grid: stage 1 at 3.70s, stage 2 at 4.75s
+        tl.fromTo(
+          "#stage1",
+          { opacity: 0, x: -46 },
+          { opacity: 1, x: 0, duration: 0.42, ease: "power3.out" },
+          3.7036
+        );
+        tl.fromTo(
+          "#stage2",
+          { opacity: 0, x: -46 },
+          { opacity: 1, x: 0, duration: 0.42, ease: "power3.out" },
+          4.7485
+        );
+        tl.fromTo(
+          "#s2-caveat",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          5.805
+        );
+
+        // ── scene 3 : the board ────────────────────────────────
+        tl.fromTo(
+          "#masthead",
+          { opacity: 0, y: -14 },
+          { opacity: 1, y: 0, duration: 0.36, ease: "power2.out" },
+          7.4356
+        );
+        tl.fromTo(
+          "#feedwrap",
+          { opacity: 0, y: 26 },
+          { opacity: 1, y: 0, duration: 0.42, ease: "power2.out" },
+          7.6
+        );
+        // beat-grid: feed rows on every other beat — 7.92 / 8.96 / 10.01 / 11.06
+        var rowTimes = [7.918, 8.9629, 10.0078, 11.0643];
+        for (var r = 0; r < rowTimes.length; r++) {
+          tl.fromTo(
+            "#row" + r,
+            { opacity: 0, x: -30, backgroundColor: "rgba(76,154,255,0.16)" },
+            {
+              opacity: 1,
+              x: 0,
+              backgroundColor: "rgba(76,154,255,0)",
+              duration: 0.42,
+              ease: "power3.out"
+            },
+            rowTimes[r]
+          );
+        }
+        tl.fromTo(
+          "#counter-box",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.3, ease: "power1.out" },
+          7.6
+        );
+        // beat-locked: the count settles on the strong cue at 11.5984s
+        var ticker = { v: 0 };
+        tl.to(
+          ticker,
+          {
+            v: 185280,
+            duration: 3.68,
+            ease: "power2.out",
+            onUpdate: function () {
+              drawCount(counterHost, Math.round(ticker.v));
+            }
+          },
+          7.918
+        );
+        tl.fromTo(
+          "#counter-bloom",
+          { opacity: 0 },
+          { opacity: 1, duration: 0.18, ease: "power2.out" },
+          11.5984
+        );
+        tl.to("#counter-bloom", { opacity: 0.35, duration: 0.7, ease: "power2.out" }, 11.78);
+        tl.fromTo(
+          "#s3-facts",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.38, ease: "power2.out" },
+          8.4405
+        );
+
+        // ── scene 4 : the turn ─────────────────────────────────
+        // beat-locked: strong cue at 12.6549s
+        tl.fromTo(
+          "#turn1",
+          { opacity: 0, y: 34 },
+          { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" },
+          12.6549
+        );
+        tl.fromTo(
+          "#turn2",
+          { opacity: 0, y: 34 },
+          { opacity: 1, y: 0, duration: 0.38, ease: "power3.out" },
+          14.2222
+        );
+        tl.fromTo(
+          "#s4-facts",
+          { opacity: 0, y: 20 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          15.2787
+        );
+
+        // ── scene 5 : the wait ─────────────────────────────────
+        tl.fromTo(
+          "#band-label",
+          { opacity: 0, y: 14 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" },
+          16.9
+        );
+        tl.fromTo(
+          "#band",
+          { opacity: 0, y: 22 },
+          { opacity: 1, y: 0, duration: 0.4, ease: "power2.out" },
+          16.98
+        );
+        tl.fromTo(
+          "#s5-note",
+          { opacity: 0, y: 18 },
+          { opacity: 1, y: 0, duration: 0.38, ease: "power2.out" },
+          17.3801
+        );
+        tl.fromTo(
+          "#scan",
+          { opacity: 0, x: -260 },
+          { opacity: 1, x: 200, duration: 0.42, ease: "power1.out" },
+          19.4815
+        );
+        tl.to("#scan", { opacity: 0, x: 900, duration: 0.62, ease: "power1.in" }, 19.905);
+        tl.to("#s5-note", { opacity: 0, duration: 0.3, ease: "power1.in" }, 20.22);
+        // beat-locked: the verdict lands on the strong cue at 20.5264s
+        tl.fromTo(
+          "#s5-verdict",
+          { opacity: 0, y: 26 },
+          { opacity: 1, y: 0, duration: 0.36, ease: "power3.out" },
+          20.5264
+        );
+
+        // ── scene 6 : outro ────────────────────────────────────
+        tl.fromTo(
+          "#wordmark",
+          { opacity: 0, y: 28 },
+          { opacity: 1, y: 0, duration: 0.42, ease: "power3.out" },
+          21.62
+        );
+        tl.fromTo(
+          "#url",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" },
+          22.117
+        );
+        tl.fromTo(
+          "#kicker",
+          { opacity: 0, y: 16 },
+          { opacity: 1, y: 0, duration: 0.34, ease: "power2.out" },
+          22.6395
+        );
+
+        // ── music shape ────────────────────────────────────────
+        tl.fromTo("#v-bgm", { volume: 0.06 }, { volume: 0.3, duration: 1.4 }, 0);
+        tl.to("#v-bgm", { volume: 0.42, duration: 0.5 }, 7.4);
+        tl.to("#v-bgm", { volume: 0.24, duration: 0.4 }, 12.6);
+        tl.to("#v-bgm", { volume: 0.36, duration: 0.6 }, 16.9);
+        tl.to("#v-bgm", { volume: 0, duration: 1.2 }, 22.9);
+
+        // ── audio-reactive: per-frame sampling, glow only ──────
+        var glow = document.getElementById("bg-glow");
+        var bloom = document.getElementById("counter-bloom");
+        var frames = AUDIO_DATA.frames;
+        var fps = AUDIO_DATA.fps;
+        for (var f = 0; f < frames.length; f++) {
+          tl.call(
+            (function (fr) {
+              return function () {
+                glow.style.opacity = (0.18 + fr[0] * 0.55).toFixed(3);
+                bloom.style.filter = "blur(" + (10 + fr[1] * 26).toFixed(1) + "px)";
+              };
+            })(frames[f]),
+            [],
+            f / fps
+          );
+        }
+
+        window.__timelines["vertical"] = tl;
+        tl.seek(0);
+      }
+
+      if (document.fonts && document.fonts.ready) {
+        document.fonts.ready.then(build);
+      } else {
+        build();
+      }
+    </script>
+  </body>
+</html>
